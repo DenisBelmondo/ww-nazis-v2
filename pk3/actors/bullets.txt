@@ -1,4 +1,4 @@
-ACTOR Tracer : FastProjectile
+ACTOR Tracer : ZTracer
 {
 	Alpha .9
 	RenderStyle Add
@@ -8,16 +8,14 @@ ACTOR Tracer : FastProjectile
 	+BLOODSPLATTER
 	+SEEKERMISSILE
 	Scale .4
-	MissileType TracerTrail
-	MissileHeight 8
 	Decal BulletChip
 	States
 	{
 	Spawn:
-		PUFF A 1 BRIGHT A_JumpIfTracerCloser(96,"Whiz")
+		TNT1 A 1 A_JumpIfTracerCloser(96,"Whiz")
 		Loop
 	Whiz:
-		PUFF A -1 BRIGHT A_SpawnItemEx("Whizzer")
+		TNT1 A -1 A_SpawnItemEx("Whizzer")
 		Stop
 	Death:
 	Crash:
@@ -38,24 +36,6 @@ ACTOR Whizzer
 	Spawn:
 		TNT1 A 1 A_PlaySound("whiz")
 		Stop
-	}
-}
-
-ACTOR TracerTrail
-{
-	Alpha .75
-	RenderStyle Add
-	+NOBLOCKMAP
-	+NOGRAVITY
-	+NOTELEPORT
-	+CANNOTPUSH
-	+NODAMAGETHRUST
-	Scale .4
-	States
-	{
-	Spawn:
-		PUFF A 1 BRIGHT A_FadeOut(0.3)
-		Loop
 	}
 }
 
