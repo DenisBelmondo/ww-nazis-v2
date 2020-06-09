@@ -1,0 +1,144 @@
+class WeaselsRevolver : NaziWeapon
+{
+	default
+	{
+		Tag ".357 Revolver";
+		Scale .5;
+		Inventory.PickupMessage "You got the revolver!";
+		Weapon.AmmoType "WeaselsRevolverLoaded";
+		Weapon.AmmoUse 1;
+		Weapon.AmmoType2 "357Ammo";
+		Weapon.AmmoUse2 1;
+		Weapon.SelectionOrder 9996;
+		Weapon.UpSound "revolver/select";
+	}
+
+	states
+	{
+	Select:
+		REVG A 0 A_Raise();
+		REVG A 1 A_Raise();
+		loop;
+	Deselect:
+		REVG A 0 A_Lower();
+		REVG A 1 A_Lower();
+		loop;
+	Ready:
+		REVG A 0 A_JumpIfInventory("WeaselsRevolverLoaded", 0, 2);
+		REVG A 0 A_JumpIfInventory("357Ammo", 1, 2);
+		REVG A 1 A_WeaponReady();
+		loop;
+		REVG A 1 A_WeaponReady(WRF_ALLOWRELOAD);
+		loop;
+	Fire:
+		REVG B 0 A_JumpIfInventory("WeaselsRevolverLoaded", 1, 1);
+		goto Dryfire;
+		REVG B 0 A_GunFlash();
+		REVG B 0 A_StartSound("revolver/fire", CHAN_WEAPON);
+		REVG B 0 ACS_NamedExecute("WWNaziTaunt", 0, 1);
+		REVG B 0 A_GiveInventory("RevolverShotCounter");
+		REVG B 0 A_AlertMonsters();
+		REVG B 2 A_FireProjectile("RevolverTracer", frandom(-1.5, 1.5), 1, 0, 0, 0, frandom(-0.8, 0.8));
+		REVG C 1 Offset(0, 38) A_SetPitch(pitch - (0.6 * CallACS("RecoilAmount")));
+		REVG D 1 Offset(0, 44) A_SetPitch(pitch - (0.6 * CallACS("RecoilAmount")));
+		REVG D 1 Offset(0, 56) A_SetPitch(pitch - (0.6 * CallACS("RecoilAmount")));
+		REVG D 1 Offset(0, 52);
+		REVG C 1 Offset(0, 50);
+		REVG C 1 Offset(0, 47);
+		REVG C 1 Offset(0, 44);
+		REVG A 1 Offset(0, 40) A_Jump(128, 2);
+		REVG A 1 Offset(0, 36);
+		REVG A 1 Offset(0, 34);
+		REVG A 1 Offset(0, 33);
+		REVG A 1 Offset(0, 32) A_CheckReload;
+		goto Ready;
+	Reload:
+		TNT1 A 0 A_JumpIfInventory("RevolverShotCounter", 1, 2);
+		TNT1 A 0 A_Jump(256, 3);
+		TNT1 A 0 A_TakeInventory("RevolverShotCounter", 1);
+		TNT1 A 0 A_SpawnItemEx("RevolverCasing", 12, -20, 32, 0, 0, 0, random(-55, -80), SXF_NOCHECKPOSITION);
+		loop;
+		REVG A 0 ACS_NamedExecute("WWNaziTaunt", 0, 2);
+		REVG A 1 Offset(0, 35) A_StartSound("revolver/out",5);
+		REVG C 1 Offset(0, 38);
+		REVG C 1 Offset(0, 44);
+		REVG C 1 Offset(0, 52);
+		REVG D 1 Offset(0, 62);
+		REVG D 1 Offset(0, 72);
+		REVG D 1 Offset(0, 82);
+		TNT1 A 11;
+	ReloadLoop:
+		TNT1 A 0 A_TakeInventory("357Ammo", 1, TIF_NOTAKEINFINITE);
+		TNT1 A 0 A_GiveInventory("WeaselsRevolverLoaded");
+		TNT1 A 0 A_JumpIfInventory("WeaselsRevolverLoaded", 0, "ReloadFinish");
+		TNT1 A 0 A_JumpIfInventory("357Ammo", 1, "ReloadLoop");
+	ReloadFinish:
+		RHND A 3 Offset(0, 32);
+		RHND B 3 A_StartSound("revolver/load", 5);
+		RHND B 2 Offset(0, 40);
+		RHND BAC 3 Offset(0, 32);
+		TNT1 A 4;
+		REVG D 1 Offset(0, 82) A_StartSound("revolver/in", 5);
+		REVG D 1 Offset(0, 72);
+		REVG D 1 Offset(0, 62);
+		REVG C 1 Offset(0, 52);
+		REVG C 1 Offset(0, 44);
+		REVG C 1 Offset(0, 38);
+		REVG A 1 Offset(0, 35);
+		REVG A 1 Offset(0, 32);
+		goto Ready;
+	Flash:
+		REVF A 2 Bright A_Light(2);
+		TNT1 A 2 A_Light(1);
+		goto LightDone;
+	Spawn:
+		REVP A -1;
+		stop;
+	}
+}
+
+class WeaselsRevolverLoaded : Ammo
+{
+	default
+	{
+		Tag ".357 Magnum";
+		Inventory.MaxAmount 6;
+		Inventory.Icon "REVPA0";
+
+		+INVENTORY.IGNORESKILL;
+	}
+}
+
+class WeaselsRevolverSpawner : Actor
+{
+	states
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_SpawnItemEx("WeaselsRevolverPickup", 0, 0, 0, vel.x, vel.y, vel.z);
+		TNT1 A 0 A_SpawnItemEx("357Ammo", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
+		stop;
+	}
+}
+
+class WeaselsRevolverPickup : NaziWeaponPickup
+{
+	default
+	{
+		Scale .5;
+	}
+
+	states
+	{
+	Spawn:
+		REVP A 0 NoDelay A_SetUserVar("user_weapon", 6);
+		goto Idle;
+	}
+}
+
+class RevolverShotCounter : Inventory
+{
+	default
+	{
+		Inventory.MaxAmount 6;
+	}
+}

@@ -1,3 +1,79 @@
 version "4.0"
 
 #include "zscript/belmondo/ztracer.zc"
+
+class NaziWeapon : Weapon
+{
+    default
+    {
+        Weapon.BobStyle "InverseSmooth";
+        Weapon.BobSpeed 2.2;
+        Weapon.BobRangeY 0.5;
+        Weapon.BobRangeX 0.7;
+
+        +INVENTORY.UNTOSSABLE;
+        +WEAPON.AMMO_CHECKBOTH;
+        +WEAPON.NOALERT;
+        +WEAPON.CHEATNOTWEAPON;
+    }
+
+	states
+	{
+	Dryfire:
+		"####" "#" 1 A_JumpIf(CallACS("Autoreload") == 1, "Reload");
+		"####" "#" 1 Offset(0, 35) A_PlaySound("weapon/dryfire", CHAN_WEAPON);
+		"####" "#" 9 Offset(0, 34);
+		"####" "#" 0 A_Jump(256, "Ready");
+		stop;
+	}
+}
+
+class NaziWeaponPickup : Actor
+{
+	int user_weapon;
+
+    default
+    {
+        +LOOKALLAROUND;
+    }
+
+    states
+	{
+	Idle:
+		"####" "#" 1 A_LookEx(LOF_NOSOUNDCHECK);
+		wait;
+	See:
+		"####" "#" 1 A_JumpIfCloser(radius * 1.5,"Pickup");
+		goto Idle;
+	Pickup:
+		"####" "#" 1 A_JumpIf(ACS_NamedExecuteWithResult("WWNaziWeaponCollect", user_weapon), 1);
+		goto See;
+		TNT1 A 0;
+		stop;
+	}
+}
+
+#include "zscript/weasel/weapons/Enfield.zc"
+#include "zscript/weasel/weapons/FG42.zc"
+#include "zscript/weasel/weapons/Garand.zc"
+#include "zscript/weasel/weapons/Kar98k.zc"
+#include "zscript/weasel/weapons/StG44.zc"
+#include "zscript/weasel/weapons/Thompson.zc"
+#include "zscript/weasel/weapons/browning.zc"
+#include "zscript/weasel/weapons/duster.zc"
+#include "zscript/weasel/weapons/flamer.zc"
+#include "zscript/weasel/weapons/g43.zc"
+#include "zscript/weasel/weapons/granate.zc"
+#include "zscript/weasel/weapons/luger.zc"
+#include "zscript/weasel/weapons/m1911.zc"
+#include "zscript/weasel/weapons/mp40.zc"
+#include "zscript/weasel/weapons/nebelwerfer.zc"
+#include "zscript/weasel/weapons/p38.zc"
+#include "zscript/weasel/weapons/panzerschreck.zc"
+#include "zscript/weasel/weapons/ppsh41.zc"
+#include "zscript/weasel/weapons/revolver.zc"
+#include "zscript/weasel/weapons/seekrit!.zc"
+#include "zscript/weasel/weapons/shotgun.zc"
+#include "zscript/weasel/weapons/shovel.zc"
+#include "zscript/weasel/weapons/sten.zc"
+#include "zscript/weasel/weapons/umg43.zc"
