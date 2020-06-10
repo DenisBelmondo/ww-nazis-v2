@@ -1,0 +1,348 @@
+//Doom
+class ClipSpawner : RandomSpawner replaces Clip
+{
+	default
+	{
+		DropItem "Three57Ammo";
+		DropItem "Three57Ammo";
+		DropItem "Three57Ammo";
+		DropItem "Three57Ammo";
+		DropItem "ParabellumAmmo";
+		DropItem "ParabellumAmmo";
+		DropItem "ParabellumAmmo";
+		DropItem "WeaselsRevolverSpawner";
+		DropItem "WeaselsRevolverSpawner";
+		DropItem "M1911Spawner";
+	}
+}
+
+class ClipBoxSpawner : RandomSpawner replaces ClipBox
+{
+	default
+	{
+		DropItem "ParabellumAmmoBox";
+		DropItem "Forty5ACPAmmoBox";
+		DropItem "TokarevAmmo";
+	}
+}
+
+class ShellSpawner : RandomSpawner replaces Shell
+{
+	default
+	{
+		DropItem "TwelveGaugeAmmo";
+	}
+}
+
+class ShellBoxSpawner : RandomSpawner replaces ShellBox
+{
+	default
+	{
+		DropItem "TwelveGaugeAmmoBox";
+	}
+}
+
+class RocketAmmoSpawner : RandomSpawner replaces RocketAmmo
+{
+	default
+	{
+		DropItem "GrenadePickup";
+		DropItem "PanzerAmmo";
+	}
+}
+
+class RocketBoxSpawner : RandomSpawner replaces RocketBox
+{
+	default
+	{
+		DropItem "FlameAmmo";
+		DropItem "NebAmmoBox";
+	}
+}
+
+class CellSpawner : RandomSpawner replaces Cell
+{
+	default
+	{
+		DropItem "KurzAmmo";
+		DropItem "MauserAmmo";
+		DropItem "Three03Ammo";
+		DropItem "Thirty06Ammo";
+	}
+}
+
+class CellPackSpawner : RandomSpawner replaces CellPack
+{
+	default
+	{
+		DropItem "MauserAmmoBox";
+		DropItem "Three03AmmoBox";
+		DropItem "Thirty06AmmoBox";
+	}
+}
+
+class ChainsawSpawner : RandomSpawner replaces Chainsaw
+{
+	default
+	{
+		DropItem "ShovelPickup";
+		DropItem "KnuckleDustersPickup";
+		DropItem "FirebrandPickup";
+	}
+}
+
+class PistolSpawner : RandomSpawner replaces Pistol
+{
+	default
+	{
+		DropItem "WeaselsRevolverSpawner";
+		DropItem "M1911Spawner";
+	}
+}
+
+class ShotgunSpawner : RandomSpawner replaces Shotgun
+{
+	default
+	{
+		DropItem "TrenchShotgunSpawner";
+	}
+}
+
+class SuperShotgunSpawner : RandomSpawner replaces SuperShotgun
+{
+	default
+	{
+		DropItem "Browning5Spawner";
+	}
+}
+
+class ChaingunSpawner : RandomSpawner replaces Chaingun
+{
+	default
+	{
+		DropItem "ThompsonSpawner";
+		DropItem "PPSH41Spawner";
+		DropItem "StenSpawner";
+	}
+}
+
+class RocketLauncherSpawner : RandomSpawner replaces RocketLauncher
+{
+	default
+	{
+		DropItem "PyrolightSpawner";
+	}
+}
+
+class PlasmaRifleSpawner : RandomSpawner replaces PlasmaRifle
+{
+	default
+	{
+		DropItem "EnfieldSpawner";
+		DropItem "GarandSpawner";
+	}
+}
+
+class BFG9000Spawner : RandomSpawner replaces BFG9000
+{
+	default
+	{
+		DropItem "PanzerSpawner";
+	}
+}
+
+//Heretic
+
+class GoldWandAmmoSpawner : ClipSpawner replaces GoldWandAmmo {}
+class GoldWandHeftySpawner : ClipBoxSpawner replaces GoldWandHefty {}
+class CrossbowAmmoSpawner : ShellSpawner replaces CrossbowAmmo {}
+class CrossbowHeftySpawner : ShellBoxSpawner replaces CrossbowHefty {}
+class BlasterAmmoSpawner : ClipSpawner replaces BlasterAmmo {}
+class BlasterHeftySpawner : ClipBoxSpawner replaces BlasterHefty {}
+class PhoenixRodAmmoSpawner : RocketAmmoSpawner replaces PhoenixRodAmmo {}
+class PhoenixRodHeftySpawner : RocketBoxSpawner replaces PhoenixRodHefty {}
+class SkullRodAmmoSpawner : CellSpawner replaces SkullRodAmmo {}
+class SkullRodHeftySpawner : CellPackSpawner replaces SkullRodHefty {}
+class MaceAmmoSpawner : CellSpawner replaces MaceAmmo {}
+class MaceHeftySpawner : CellPackSpawner replaces MaceHefty {}
+
+class GauntletsSpawner : ChainsawSpawner replaces Gauntlets {}
+class CrossbowSpawner : ShotgunSpawner replaces Crossbow {}
+class ArtiTimebombSpawner : SuperShotgunSpawner replaces ArtiTimebomb {}
+class BlasterSpawner : ChaingunSpawner replaces Blaster {}
+class PhoenixRodSpawner : RocketLauncherSpawner replaces PhoenixRod {}
+class SkullRodSpawner : PlasmaRifleSpawner replaces SkullRod {}
+class FiremaceSpawner : BFG9000Spawner replaces Mace {}
+
+//Chex Quest
+
+class MiniZorchRechargeSpawner : ClipSpawner replaces MiniZorchRecharge {}
+class MiniZorchPackSpawner : ClipBoxSpawner replaces MiniZorchPack {}
+class LargeZorchRechargeSpawner : ShellSpawner replaces LargeZorchRecharge {}
+class LargeZorchPackSpawner : ShellBoxSpawner replaces LargeZorchPack {}
+class PropulsorZorchSpawner : RocketAmmoSpawner replaces PropulsorZorch {}
+class PropulsorZorchPackSpawner : RocketBoxSpawner replaces PropulsorZorchPack {}
+class PhasingZorchSpawner : CellSpawner replaces PhasingZorch {}
+class PhasingZorchPackSpawner : CellPackSpawner replaces PhasingZorchPack {}
+
+class SuperBootsporkSpawner : ChainsawSpawner replaces SuperBootspork {}
+class LargeZorcherSpawner : ShotgunSpawner replaces LargeZorcher {}
+class RapidZorcherSpawner : ChaingunSpawner replaces RapidZorcher {}
+class ZorchPropulsorSpawner : RocketLauncherSpawner replaces ZorchPropulsor {}
+class PhasingZorcherSpawner : PlasmaRifleSpawner replaces PhasingZorcher {}
+class LAZDeviceSpawner : BFG9000Spawner replaces LAZDevice {}
+
+//Strife
+class ClipOfBulletsSpawner : ClipSpawner replaces ClipOfBullets {}
+class BoxOfBulletsSpawner : ClipBoxSpawner replaces BoxOfBullets {}
+class PoisonBoltsSpawner : ShellSpawner replaces PoisonBolts {}
+class ElectricBoltsSpawner : ShellBoxSpawner replaces ElectricBolts {}
+class MiniMissilesSpawner : RocketAmmoSpawner replaces MiniMissiles {}
+class CrateOfMissilesSpawner : RocketBoxSpawner replaces CrateOfMissiles {}
+class HEGrenadeRoundsSpawner : RocketAmmoSpawner replaces HEGrenadeRounds {}
+class PhosphorusGrenadeRoundsSpawner : RocketAmmoSpawner replaces PhosphorusGrenadeRounds {}
+class EnergyPodSpawner : CellSpawner replaces EnergyPod {}
+class EnergyPackSpawner : CellPackSpawner replaces EnergyPack {}
+
+class StrifeCrossbowSpawner : ShotgunSpawner replaces StrifeCrossbow {}
+class MiniMissileLauncherSpawner : SuperShotgunSpawner replaces MiniMissileLauncher {}
+class AssaultGunSpawner : ChaingunSpawner replaces AssaultGun {}
+class AssaultGunStandingSpawner : ChaingunSpawner replaces AssaultGunStanding {}
+class StrifeGrenadeLauncherSpawner : RocketLauncherSpawner replaces StrifeGrenadeLauncher {}
+class FlameThrowerSpawner : PlasmaRifleSpawner replaces FlameThrower {}
+class MaulerSpawner : BFG9000Spawner replaces Mauler {}
+
+class ClipOfBulletsSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ClipSpawner");
+		stop;
+	}
+}
+class BoxOfBulletsSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ClipBoxSpawner");
+		stop;
+	}
+}
+class PoisonBoltsSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ShellSpawner");
+		stop;
+	}
+}
+class ElectricBoltsSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ShellBoxSpawner");
+		stop;
+	}
+}
+class MiniMissilesSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("RocketAmmoSpawner");
+		stop;
+	}
+}
+class CrateOfMissilesSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("RocketBoxSpawner");
+		stop;
+	}
+}
+class HEGrenadeRoundsSpawner2 : MiniMissilesSpawner2 {}
+
+class PhosphorusGrenadeRoundsSpawner2 : MiniMissilesSpawner2 {}
+
+class EnergyPodSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("CellSpawner");
+		stop;
+	}
+}
+class EnergyPackSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("CellPackSpawner");
+		stop;
+	}
+}
+
+class StrifeCrossbowSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ShotgunSpawner");
+		stop;
+	}
+}
+class MiniMissileLauncherSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("SuperShotgunSpawner");
+		stop;
+	}
+}
+class AssaultGunSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("ChaingunSpawner");
+		stop;
+	}
+}
+
+class AssaultGunStandingSpawner2 : AssaultGunSpawner2 {}
+
+class StrifeGrenadeLauncherSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("RocketLauncherSpawner");
+		stop;
+	}
+}
+class FlameThrowerSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("PlasmaRifleSpawner");
+		stop;
+	}
+}
+class MaulerSpawner2 : CustomInventory
+{
+	states
+	{
+	Pickup:
+		TNT1 A 0 A_SpawnItemEx("BFG9000Spawner");
+		stop;
+	}
+}

@@ -1,0 +1,398 @@
+class DogFood : HealthBonus replaces HealthBonus
+{
+	default
+	{
+		Inventory.PickupMessage "Picked up a health bonus.";
+	}
+
+	states
+	{
+	Spawn:
+		BON1 ABCDCB 6;
+		Loop;
+	}
+}
+
+class Medikit_Small  : Stimpack replaces Stimpack
+{
+	default
+	{
+		Inventory.PickupMessage "Picked up a small medikit.";
+	}
+
+	states
+	{
+	Spawn:
+		MEDI A -1;
+		stop;
+	}
+}
+
+class Medikit_Medium : Medikit replaces Medikit
+{
+	default
+	{
+		Inventory.PickupMessage "Picked up a medium medikit.";
+		Health.LowMessage 25, "Picked up a first aid kit that you REALLY needed!";
+	}
+
+	states
+	{
+	Spawn:
+		MEDI B -1;
+		stop;
+	}
+}
+
+class Stahlhelm : ArmorBonus replaces ArmorBonus
+{
+	default
+	{
+		Scale 0.5;
+		Inventory.PickupMessage "Picked up a Stahlhelm.";
+		Inventory.Icon "STALA0";
+	}
+
+	states
+	{
+	Spawn:
+		STAL A -1;
+		Loop;
+	}
+}
+
+class FlakJacket : GreenArmor replaces GreenArmor
+{
+	default
+	{
+		Inventory.Pickupmessage "Picked up a flak jacket.";
+		Inventory.Icon "ARM3A0";
+	}
+
+	states
+	{
+	Spawn:
+		ARM3 A 6;
+		ARM3 A 7 BRIGHT;
+		Loop;
+	}
+}
+
+class HeavyArmor : BlueArmor replaces BlueArmor
+{
+	default
+	{
+		Inventory.Pickupmessage "Picked up a heavy armor vest!";
+		Inventory.Icon "ARM4A0";
+	}
+
+	states
+	{
+	Spawn:
+		ARM4 A 6;
+		ARM4 A 7 BRIGHT;
+		Loop;
+	}
+}
+
+class NazisBackpack : BackpackItem
+{
+	default
+	{
+		Height 26;
+		Inventory.PickupMessage "Picked up an ammo pack.";
+	}
+
+	states
+	{
+	Spawn:
+		BPK2 A -1;
+		stop;
+	}
+}
+
+class BackpackSpawner : Actor replaces Backpack
+{
+	states
+	{
+	Spawn:
+		TNT1 A 0 NODELAY A_SpawnItemEx("NazisBackpack");
+		TNT1 AA 0 A_SpawnItemEx("GrenadePickup",frandom(-16,16),frandom(-16,16),0,0,0,0,0,SXF_NOCHECKPOSITION);
+		stop;
+	}
+}
+
+class NaziBerserk : Berserk replaces Berserk
+{
+	default
+	{
+		Inventory.PickupMessage "Machtige!"; // "Powerful!"
+	}
+
+	states
+	{
+	Spawn:
+		PSTR A -1;
+		stop;
+	Pickup:
+		TNT1 A 0 A_GiveInventory("PowerStrength");
+		TNT1 A 0 HealThing(100, 0);
+		stop;
+	}
+}
+
+class NaziSupercharge : Soulsphere replaces Soulsphere
+{
+	default
+	{
+		Inventory.PickupMessage "Supercharge!";
+		Inventory.PickupSound "misc/p_pkup";
+	}
+
+	states
+	{
+	Spawn:
+		MEDK C -1 BRIGHT;
+		Loop;
+	}
+}
+
+class NaziMegacharge : Megasphere replaces Megasphere
+{
+	default
+	{
+		Inventory.PickupMessage "Megacharge!";
+		Inventory.PickupSound "misc/p_pkup";
+	}
+
+	states
+	{
+	Spawn:
+		MEGA ABCD 6 BRIGHT;
+		Loop;
+	Pickup:
+		TNT1 A 0 A_GiveInventory("HeavyArmor");
+		TNT1 A 0 A_GiveInventory("MegasphereHealth");
+		stop;
+	}
+}
+
+class Blueprints : Allmap replaces Allmap
+{
+	default
+	{
+		Inventory.PickupSound "misc/p_pkup";
+		Inventory.PickupMessage "Computer Area Map";
+	}
+
+	states
+	{
+	Spawn:
+		PMAP ABCDCB 6 BRIGHT;
+		Loop;
+	}
+}
+
+class CloakingDevice : BlurSphere replaces BlurSphere
+{
+	default
+	{
+		Powerup.Type "PowerInvisibility";
+		RenderStyle "Translucent";
+		Inventory.PickupMessage "Partial Invisibility";
+
+		+VISIBILITYPULSE;
+	}
+
+	states
+	{
+	Spawn:
+		PINS ABCD 6 BRIGHT;
+		Loop;
+	}
+}
+
+class BrightVision : Infrared replaces Infrared
+{
+	default
+	{
+		Powerup.Type "PowerLightAmp";
+		Inventory.PickupMessage "Light Amplification Visor";
+	}
+
+	states
+	{
+	Spawn:
+		PVIS A 6 BRIGHT;
+		PVIS B 6;
+		Loop;
+	}
+}
+
+class NaziInvincible : InvulnerabilitySphere replaces InvulnerabilitySphere
+{
+	default
+	{
+		Powerup.Type "PowerInvulnerable";
+		Powerup.Color "InverseMap";
+		Inventory.PickupMessage "Invulnerability!";
+	}
+
+	states
+	{
+	Spawn:
+		PINV ABCD 6 BRIGHT;
+		Loop;
+	}
+}
+
+class HazmatSuit : RadSuit replaces RadSuit
+{
+	default
+	{
+		Inventory.PickupMessage "Radiation Shielding Suit";
+	}
+
+	states
+	{
+	Spawn:
+		SUIT A -1 BRIGHT;
+		stop;
+	}
+}
+
+//Heretic
+
+class CrystalVialSpawner : RandomSpawner replaces CrystalVial
+{
+	default
+	{
+		DropItem "Medikit_Small";
+	}
+}
+
+class ArtiHealthSpawner : RandomSpawner replaces ArtiHealth
+{
+	default
+	{
+		DropItem "Medikit_Medium";
+	}
+}
+
+class SilverShieldSpawner : RandomSpawner replaces SilverShield
+{
+	default
+	{
+		DropItem "FlakJacket";
+	}
+}
+
+class EnchantedShieldSpawner : RandomSpawner replaces EnchantedShield
+{
+	default
+	{
+		DropItem "HeavyArmor";
+	}
+}
+
+class BagOfHoldingSpawner : BackpackSpawner replaces BagOfHolding {}
+
+class ArtiTomeOfPowerSpawner : RandomSpawner replaces ArtiTomeOfPower
+{
+	default
+	{
+		DropItem "NaziBerserk";
+	}
+}
+
+class ArtiSuperHealthSpawner : RandomSpawner replaces ArtiSuperHealth
+{
+	default
+	{
+		DropItem "NaziSupercharge";
+	}
+}
+
+class SuperMapSpawner : RandomSpawner replaces SuperMap
+{
+	default
+	{
+		DropItem "Blueprints";
+	}
+}
+
+class ArtiInvisibilitySpawner : RandomSpawner replaces ArtiInvisibility
+{
+	default
+	{
+		DropItem "CloakingDevice";
+	}
+}
+
+class ArtiTorchSpawner : RandomSpawner replaces ArtiTorch
+{
+	default
+	{
+		DropItem "BrightVision";
+	}
+}
+
+class ArtiInvulnerabilitySpawner : RandomSpawner replaces ArtiInvulnerability
+{
+	default
+	{
+		DropItem "NaziInvincible";
+	}
+}
+
+//Chex
+
+class GlassOfWaterSpawner : RandomSpawner replaces GlassOfWater
+{
+	default
+	{
+		DropItem "DogFood";
+	}
+}
+
+class BowlOfFruitSpawnerSpawner : CrystalVialSpawner replaces BowlOfFruit {}
+
+class BowlOfVegetablesSpawner : ArtiHealthSpawner replaces BowlOfVegetables {}
+
+class SlimeRepellentSpawner : RandomSpawner replaces SlimeRepellent
+{
+	default
+	{
+		DropItem "ArmorPlate";
+	}
+}
+
+class ChexArmorSpawner : SilverShieldSpawner replaces ChexArmor {}
+
+class SuperChexArmorSpawner : EnchantedShieldSpawner replaces SuperChexArmor {}
+
+class ZorchpackSpawner : BackpackSpawner replaces Zorchpack {}
+
+class SuperchargeBreakfastSpawner : ArtiSuperHealthSpawner replaces SuperchargeBreakfast {}
+
+class ComputerAreaMapSpawner : SuperMapSpawner replaces ComputerAreaMap {}
+
+class SlimeProofSuitSpawner : RandomSpawner replaces SlimeProofSuit
+{
+	default
+	{
+		DropItem "HazmatSuit";
+	}
+}
+
+//Strife
+
+class MedPatchSpawner : CrystalVialSpawner replaces MedPatch {}
+class MedicalKitSpawner : ArtiHealthSpawner replaces MedicalKit {}
+class LeatherArmorSpawner : SilverShieldSpawner replaces LeatherArmor {}
+class MetalArmorSpawner : EnchantedShieldSpawner replaces MetalArmor {}
+class AmmoSatchelSpawner : BackpackSpawner replaces AmmoSatchel {}
+class SurgeryKitSpawner : ArtiSuperHealthSpawner replaces SurgeryKit {}
+class StrifeMapSpawner : SuperMapSpawner replaces StrifeMap {}
+class ShadowArmorSpawner : ArtiInvisibilitySpawner replaces ShadowArmor {}
+class EnvironmentalSuitSpawner : SlimeProofSuitSpawner replaces EnvironmentalSuit {}

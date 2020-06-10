@@ -1,0 +1,519 @@
+class Tracer : ZTracer
+{
+	default
+	{
+		Alpha 0.9;
+		RenderStyle "Add";
+		Radius 2;
+		Height 2;
+		Speed 75;
+		Scale 0.4;
+		Decal "BulletChip";
+
+		+BLOODSPLATTER;
+		+SEEKERMISSILE;
+	}
+
+	states
+	{
+	Spawn:
+		TNT1 A 1 A_JumpIfTracerCloser(96, "Whiz");
+		Loop;
+	Whiz:
+		TNT1 A -1 A_SpawnItemEx("Whizzer");
+		stop;
+	Death:
+	Crash:
+		PUFF A 0 A_SpawnDebris("TracerSpark");
+		PUFF A 2 BRIGHT A_PlaySound("ricochet");
+		PUFF BCD 2 BRIGHT;
+		stop;
+	XDeath:
+		TNT1 A 1 A_PlaySound("hitflesh");
+		stop;
+	}
+}
+
+class Whizzer : Actor
+{
+	states
+	{
+	Spawn:
+		TNT1 A 1 A_PlaySound("whiz");
+		stop;
+	}
+}
+
+class TracerSpark : Actor
+{
+	default
+	{
+		Health 4;
+		Radius 3;
+		Height 6;
+		Speed 0.1;
+		RenderStyle "Add";
+		Scale .5;
+		Mass 0;
+		BounceType "Doom";
+
+		+MISSILE;
+		+FLOORCLIP;
+		+DONTSPLASH;
+		+NOTELEPORT;
+	}
+
+	states
+	{
+	Spawn:
+		PUFF A 1;
+		PUFF A 5 BRIGHT A_SetTranslucent(0.8, 1);
+		PUFF A 6 BRIGHT A_SetTranslucent(0.6, 1);
+		PUFF A 8 BRIGHT A_SetTranslucent(0.4, 1);
+		PUFF A 10 BRIGHT A_SetTranslucent(0.2, 1);
+		stop;
+	}
+}
+
+// The Player's variants on the tracers, so they have different speeds and damages
+// based on which weapon is being used.
+
+//Muzzle velocity: 1,148-1,312 ft/s (350-400 m/s) - Wikipedia
+class LugerTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 60;
+		DamageFunction (random(3, 17));
+		Speed 100;
+	}
+}
+
+//Muzzle velocity: 1,200 ft/s (365 m/s) - Wikipedia
+class WaltherTracer : LugerTracer
+{
+	default
+	{
+		DamageFunction (random(6, 18));
+		Speed 90;
+	}
+}
+
+class RevolverTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 45;
+		DamageFunction (random(22, 34));
+		Speed 90;
+		Obituary "%o was breached by %k's revolver.";
+	}
+}
+
+//Muzzle velocity: 825 ft/s (251 m/s) - Wikipedia
+class M1911Tracer : RevolverTracer
+{
+	default
+	{
+		Obituary "%o was executed by %k's M1911.";
+	}
+}
+
+class ShotgunTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(5, 15));
+	}
+
+	states
+	{
+	Death:
+	Crash:
+		PUFF BCD 3 BRIGHT;
+		stop;
+	}
+}
+
+class AutoShotgunTracer : ShotgunTracer
+{
+	default
+	{
+		Obituary "%o was peppered by %k's auto shotgun.";
+	}
+}
+
+//Muzzle velocity: 1,312 ft/s (400 m/s) - Wikipedia
+class MP40Tracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(9, 14));
+		Speed 90;
+	}
+}
+
+//Muzzle velocity: 1,600.6 ft/s (488 m/s) - Wikipedia
+class PPSHTracer : WaltherTracer
+{
+	default
+	{
+		DamageFunction (random(11, 12));
+		Speed 100;
+	}
+}
+
+//Muzzle velocity: 1,001 ft/s (305 m/s) - Wikipedia
+class StenTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(9, 14));
+	}
+}
+
+//Muzzle velocity: 935 ft/s (285 m/s) - Wikipedia
+class ThompsonTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 100;
+		DamageFunction (random(14, 18));
+		Speed 120;
+	}
+}
+
+//Muzzle velocity: 2,822 ft/s (860 m/s) - Wikipedia
+class Kar98kTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 100;
+		DamageFunction (random(40, 65));
+		Speed 180;
+		Obituary "%o was gunned down by %k's Mauser.";
+	}
+}
+
+//Muzzle velocity: 2,448-2,546 ft/s (746-776 m/s) - Wikipedia
+class G43Tracer : Kar98kTracer
+{
+	default
+	{
+		DamageFunction (random(26, 55));
+		Speed 150;
+		Obituary "";
+	}
+}
+
+//Muzzle velocity: 2,441 ft/s (744 m/s) - Wikipedia
+class EnfieldTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(40, 65));
+		Speed 180;
+	}
+}
+
+//Muzzle velocity: 2,800 ft/s (853 m/s) - Wikipedia
+class GarandTracer : EnfieldTracer
+{
+	default
+	{
+		ProjectileKickback 100;
+	}
+}
+
+//Muzzle velocity: 2,247 ft/s (685 m/s) - Wikipedia
+class StGTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 100;
+		DamageFunction (random(18, 24));
+		Speed 115;
+	}
+}
+
+//Muzzle velocity: 2,428 ft/s (740 m/s) - Wikipedia
+class FGTracer : Tracer
+{
+	default
+	{
+		ProjectileKickback 100;
+		DamageFunction (random(30, 44));
+		Speed 155;
+	}
+}
+
+class ChaingunTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(11, 15));
+		Speed 90;
+	}
+}
+
+//Shells/Casings
+class ParabellumCasing : Actor
+{
+	default
+	{
+		Scale .075;
+		BounceType "Doom";
+		BounceSound "bulletcasing/bounce";
+		BounceFactor 0.5;
+		WallBounceFactor 0.2;
+		Mass 5;
+		Radius 3;
+		Height 3;
+		Projectile;
+
+		-NOGRAVITY;
+		-NOBLOCKMAP;
+		+BOUNCEONACTORS;
+	}
+
+	states
+	{
+	Spawn:
+		CAS1 ABCDEFGH 2;
+		Loop;
+	Death:
+		"####" A 0 A_Jump(256, 1, 2, 3);
+		"####" ACG 0 A_Jump(256, "Death1");
+		stop;
+	Death1:
+		"####" "#" 1 A_SetTics(CallACS("ShellLifetime"));
+		"####" "#" 1 A_FadeOut(0.1);
+		wait;
+	}
+}
+
+class RevolverCasing : ParabellumCasing {}
+
+class Forty5ACPCasing : ParabellumCasing
+{
+	default
+	{
+		Scale 0.1;
+	}
+
+	states
+	{
+	Spawn:
+		CAS3 ABCDEFGH 2;
+		Loop;
+	}
+}
+
+class ShotgunCasing : ParabellumCasing
+{
+	default
+	{
+		WallBounceSound "shellcasing/bounce";
+		BounceSound "shellcasing/bounce";
+		DeathSound "shellcasing/stop";
+		Scale .175;
+	}
+
+	states
+	{
+	Spawn:
+		CAS2 ABCDEFGH 2;
+		Loop;
+	}
+}
+
+class TokarevCasing : ParabellumCasing {}
+
+class MauserRifleCasing : ParabellumCasing
+{
+	default
+	{
+		Scale 0.15;
+	}
+
+	states
+	{
+	Spawn:
+		CAS4 ABCDEFGH 2;
+		Loop;
+	}
+}
+
+class EnfieldRifleCasing : MauserRifleCasing {}
+
+class GarandRifleCasing : MauserRifleCasing {}
+
+class STGCasing : MauserRifleCasing {}
+
+// Enemy tracer variants for Normal mode.
+class EnemyPistolTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(4, 8));
+	}
+}
+
+class EnemySMGTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(6, 7));
+	}
+}
+
+class EnemyRifleTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(15, 30));
+	}
+}
+
+class EnemyStGTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(7, 8));
+	}
+}
+
+class EnemyChaingunTracer : Tracer
+{
+	default
+	{
+		DamageFunction (random(6, 8));
+	}
+}
+
+// Enemy tracer variants for Baby mode
+class BabyEnemyPistolTracer : EnemyPistolTracer
+{
+	default
+	{
+		Speed 30;
+	}
+}
+
+class BabyEnemySMGTracer : EnemySMGTracer
+{
+	default
+	{
+		Speed 30;
+	}
+}
+
+class BabyEnemyRifleTracer : EnemyRifleTracer
+{
+	default
+	{
+		Speed 30;
+	}
+}
+
+class BabyEnemyStGTracer : EnemyStGTracer
+{
+	default
+	{
+		Speed 30;
+	}
+}
+
+class BabyEnemyChaingunTracer : EnemyChaingunTracer
+{
+	default
+	{
+		Speed 30;
+	}
+}
+
+// Enemy tracer variants for Easy mode
+class EasyEnemyPistolTracer : EnemyPistolTracer
+{
+	default
+	{
+		Speed 50;
+	}
+}
+
+class EasyEnemySMGTracer : EnemySMGTracer
+{
+	default
+	{
+		Speed 50;
+	}
+}
+
+class EasyEnemyRifleTracer : EnemyRifleTracer
+{
+	default
+	{
+		Speed 50;
+	}
+}
+
+class EasyEnemyStGTracer : EnemyStGTracer
+{
+	default
+	{
+		Speed 50;
+	}
+}
+
+class EasyEnemyChaingunTracer : EnemyChaingunTracer
+{
+	default
+	{
+		Speed 50;
+	}
+}
+
+// Enemy tracer variants for Hard and Nightmare mode
+class HardEnemyPistolTracer : EnemyPistolTracer
+{
+	default
+	{
+		Speed 90;
+	}
+}
+
+class HardEnemySMGTracer : EnemySMGTracer
+{
+	default
+	{
+		Speed 90;
+		+MTHRUSPECIES;
+	}
+}
+
+class HardEnemyRifleTracer : EnemyRifleTracer
+{
+	default
+	{
+		Speed 90;
+		+MTHRUSPECIES;
+	}
+}
+
+class HardEnemyStGTracer : EnemyStGTracer
+{
+	default
+	{
+		Speed 90;
+		+MTHRUSPECIES;
+	}
+}
+
+class HardEnemyChaingunTracer : EnemyChaingunTracer
+{
+	default
+	{
+		Speed 90;
+		+MTHRUSPECIES;
+	}
+}

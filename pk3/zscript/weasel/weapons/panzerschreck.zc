@@ -169,7 +169,7 @@ class PanzerRocket : Actor
 	Spawn:
 		MNSS A 1 Bright NoDelay A_StartSound("panzer/fly", CHAN_VOICE, 1.0, 1);
 		MNSS A 1 Bright A_SpawnItemEx("RocketFlame", random(-1, 1), 0, random(-1, 1));
-		Wait;
+		wait;
 	Death:
 		EXP1 A 0 A_SetScale(1.25, 1.25);
 		EXP1 A 0 A_AlertMonsters();

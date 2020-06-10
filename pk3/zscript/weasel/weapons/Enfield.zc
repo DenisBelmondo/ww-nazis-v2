@@ -11,7 +11,7 @@ class Enfield : NaziWeapon
 		Weapon.SelectionOrder 750;
 		Weapon.AmmoType "EnfieldLoaded";
 		Weapon.AmmoUse 1;
-		Weapon.AmmoType2 "303Ammo";
+		Weapon.AmmoType2 "Three03Ammo";
 		Weapon.AmmoUse2 1;
 		Weapon.UpSound "enfield/select";
 
@@ -30,7 +30,7 @@ class Enfield : NaziWeapon
 		loop;
 	Ready:
 		ENFG A 0 A_JumpIfInventory("EnfieldLoaded", 0, 2);
-		ENFG A 0 A_JumpIfInventory("303Ammo", 1, 2);
+		ENFG A 0 A_JumpIfInventory("Three03Ammo", 1, 2);
 		ENFG A 1 A_WeaponReady();
 		loop;
 		ENFG A 1 A_WeaponReady(WRF_ALLOWRELOAD);
@@ -81,9 +81,9 @@ class Enfield : NaziWeapon
 		ENFG A 2 Offset(5,74);
 		ENFG A 8 Offset(6,76);
 		ENFG A 0 A_JumpIfInventory("EnfieldLoaded", 5, "ReloadLoop2");
-		ENFG A 0 A_JumpIfInventory("303Ammo", 5, 1);
+		ENFG A 0 A_JumpIfInventory("Three03Ammo", 5, 1);
 		goto ReloadLoop2;
-		TNT1 A 0 A_TakeInventory("303Ammo", 5);
+		TNT1 A 0 A_TakeInventory("Three03Ammo", 5);
 		TNT1 A 0 A_GiveInventory("EnfieldLoaded", 5);
 		ENFG A 1 Offset(6,80) A_StartSound("enfield/load", 5);
 		ENFG A 1 Offset(6,84);
@@ -94,14 +94,14 @@ class Enfield : NaziWeapon
 		ENFG A 1 Offset(8,82);
 		ENFG A 1 Offset(7,77);
 		ENFG A 0 A_JumpIfInventory("EnfieldLoaded", 0, "ReloadOnlyOneClip");
-		TNT1 A 0 A_JumpIfInventory("303Ammo", 1, 1);
+		TNT1 A 0 A_JumpIfInventory("Three03Ammo", 1, 1);
 		goto ReloadOnlyOneClip;
 		ENFG A 5 Offset(6, 75);
 	ReloadLoop2:
-		TNT1 A 0 A_TakeInventory("303Ammo", 1);
+		TNT1 A 0 A_TakeInventory("Three03Ammo", 1);
 		TNT1 A 0 A_GiveInventory("EnfieldLoaded");
 		TNT1 A 0 A_JumpIfInventory("EnfieldLoaded", 0, "ReloadFinish");
-		TNT1 A 0 A_JumpIfInventory("303Ammo", 1, "ReloadLoop2");
+		TNT1 A 0 A_JumpIfInventory("Three03Ammo", 1, "ReloadLoop2");
 	ReloadFinish:
 		ENFG A 1 Offset(6,80) A_StartSound("enfield/load", 5);
 		ENFG A 1 Offset(6,84);
@@ -150,7 +150,7 @@ class EnfieldSpawner : Actor
 	{
 	Spawn:
 		TNT1 A 0 NoDelay A_SpawnItemEx("EnfieldPickup", 0, 0, 0, vel.x, vel.y, vel.z);
-		TNT1 A 0 A_SpawnItemEx("303AmmoBox", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
+		TNT1 A 0 A_SpawnItemEx("Three03AmmoBox", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
 		stop;
 	}
 }

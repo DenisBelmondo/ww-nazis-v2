@@ -6,7 +6,7 @@ class Garand : NaziWeapon
 		Inventory.PickupMessage "You got the M1 Garand!";
 		Weapon.AmmoType "GarandLoaded";
 		Weapon.AmmoUse 1;
-		Weapon.AmmoType2 "3006Ammo";
+		Weapon.AmmoType2 "Thirty06Ammo";
 		Weapon.AmmoUse2 1;
 		Weapon.SelectionOrder 750;
 		Weapon.UpSound "garand/select";
@@ -18,7 +18,7 @@ class Garand : NaziWeapon
 	{
 	Ready:
 		M1A1 A 0 A_JumpIfInventory("GarandLoaded", 0, 2);
-		M1A1 A 0 A_JumpIfInventory("3006Ammo", 1, 2);
+		M1A1 A 0 A_JumpIfInventory("Thirty06Ammo", 1, 2);
 		M1A1 A 1 A_WeaponReady();
 		loop;
 		M1A1 A 1 A_WeaponReady(WRF_ALLOWRELOAD);
@@ -96,10 +96,10 @@ class Garand : NaziWeapon
 		M1AR CDDEFGHH 1;
 		M1AR IJK 2;
 	ReloadLoop:
-		M1AR A 0 A_TakeInventory("3006Ammo", 1, TIF_NOTAKEINFINITE);
+		M1AR A 0 A_TakeInventory("Thirty06Ammo", 1, TIF_NOTAKEINFINITE);
 		M1AR A 0 A_GiveInventory("GarandLoaded");
 		M1AR A 0 A_JumpIfInventory("GarandLoaded", 0, "ReloadFinish");
-		M1AR A 0 A_JumpIfInventory("3006Ammo", 1, "ReloadLoop");
+		M1AR A 0 A_JumpIfInventory("Thirty06Ammo", 1, "ReloadLoop");
 	ReloadFinish:
 		M1AR LMNOOPPBBBBBA 1;
 		M1AR A 1 A_TakeInventory("M1Pinged");
@@ -134,7 +134,7 @@ class GarandSpawner : Actor
 	{
 	Spawn:
 		TNT1 A 0 NoDelay A_SpawnItemEx("GarandPickup", 0, 0, 0, vel.x, vel.y, vel.z);
-		TNT1 A 0 A_SpawnItemEx("3006AmmoBox", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
+		TNT1 A 0 A_SpawnItemEx("Thirty06AmmoBox", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
 		stop;
 	}
 }

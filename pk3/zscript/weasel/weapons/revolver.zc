@@ -7,7 +7,7 @@ class WeaselsRevolver : NaziWeapon
 		Inventory.PickupMessage "You got the revolver!";
 		Weapon.AmmoType "WeaselsRevolverLoaded";
 		Weapon.AmmoUse 1;
-		Weapon.AmmoType2 "357Ammo";
+		Weapon.AmmoType2 "Three57Ammo";
 		Weapon.AmmoUse2 1;
 		Weapon.SelectionOrder 9996;
 		Weapon.UpSound "revolver/select";
@@ -25,7 +25,7 @@ class WeaselsRevolver : NaziWeapon
 		loop;
 	Ready:
 		REVG A 0 A_JumpIfInventory("WeaselsRevolverLoaded", 0, 2);
-		REVG A 0 A_JumpIfInventory("357Ammo", 1, 2);
+		REVG A 0 A_JumpIfInventory("Three57Ammo", 1, 2);
 		REVG A 1 A_WeaponReady();
 		loop;
 		REVG A 1 A_WeaponReady(WRF_ALLOWRELOAD);
@@ -68,10 +68,10 @@ class WeaselsRevolver : NaziWeapon
 		REVG D 1 Offset(0, 82);
 		TNT1 A 11;
 	ReloadLoop:
-		TNT1 A 0 A_TakeInventory("357Ammo", 1, TIF_NOTAKEINFINITE);
+		TNT1 A 0 A_TakeInventory("Three57Ammo", 1, TIF_NOTAKEINFINITE);
 		TNT1 A 0 A_GiveInventory("WeaselsRevolverLoaded");
 		TNT1 A 0 A_JumpIfInventory("WeaselsRevolverLoaded", 0, "ReloadFinish");
-		TNT1 A 0 A_JumpIfInventory("357Ammo", 1, "ReloadLoop");
+		TNT1 A 0 A_JumpIfInventory("Three57Ammo", 1, "ReloadLoop");
 	ReloadFinish:
 		RHND A 3 Offset(0, 32);
 		RHND B 3 A_StartSound("revolver/load", 5);
@@ -115,7 +115,7 @@ class WeaselsRevolverSpawner : Actor
 	{
 	Spawn:
 		TNT1 A 0 NoDelay A_SpawnItemEx("WeaselsRevolverPickup", 0, 0, 0, vel.x, vel.y, vel.z);
-		TNT1 A 0 A_SpawnItemEx("357Ammo", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
+		TNT1 A 0 A_SpawnItemEx("Three57Ammo", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
 		stop;
 	}
 }

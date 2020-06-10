@@ -1,0 +1,233 @@
+//Doom
+class ZombiemanSpawner : RandomSpawner replaces Zombieman
+{
+	default
+	{
+		DropItem "Guard";
+		DropItem "WGuard";
+		DropItem "SSGuard";
+	}
+}
+
+class ShotgunGuySpawner : RandomSpawner replaces ShotgunGuy
+{
+	default
+	{
+		DropItem "MP40Guard";
+		DropItem "WMP40Guard";
+		DropItem "SSMP40Guard";
+	}
+}
+
+class WolfensteinSSSpawner : ShotgunGuySpawner replaces WolfensteinSS {}
+
+class ChaingunGuySpawner : RandomSpawner replaces ChaingunGuy
+{
+	default
+	{
+		DropItem "RifleGuard";
+		DropItem "WRifleGuard";
+		DropItem "WaffenSS";
+	}
+}
+
+class SpectreSpawner : RandomSpawner replaces Spectre
+{
+	default
+	{
+		DropItem "Paratrooper";
+		DropItem "Mutant";
+	}
+}
+
+class DoomImpSpawner : RandomSpawner replaces DoomImp
+{
+	default
+	{
+		DropItem "Officer";
+		DropItem "WOfficer";
+		DropItem "SSOfficer";
+	}
+}
+class DemonSpawner : RandomSpawner replaces Demon
+{
+	default
+	{
+		DropItem "Rottweiler";
+		DropItem "GermanShepherd";
+		DropItem "Doberman";
+	}
+}
+
+class RevenantSpawner : RandomSpawner replaces Revenant
+{
+	default
+	{
+		DropItem "RocketMan", 255, 2;
+		DropItem "MadDoctor", 255, 1;
+	}
+}
+
+class HellKnightSpawner : RandomSpawner replaces HellKnight
+{
+	default
+	{
+		DropItem "SuperSoldier", 255, 7;
+		DropItem "SuperSoldierGirl", 255, 1;
+	}
+}
+
+class BaronOfHellSpawner : RandomSpawner replaces BaronOfHell
+{
+	default
+	{
+		DropItem "SuperSoldierElite";
+	}
+}
+
+class ArchvileSpawner : RandomSpawner replaces Archvile
+{
+	default
+	{
+		DropItem "General";
+	}
+}
+
+class ArachnotronSpawner : RandomSpawner replaces Arachnotron
+{
+	default
+	{
+		DropItem "FlamerMan";
+	}
+}
+
+class CacodemonSpawner : RandomSpawner replaces Cacodemon
+{
+	default
+	{
+		DropItem "HitlerGhost";
+	}
+}
+
+class LostSoulSpawner : RandomSpawner replaces LostSoul
+{
+	default
+	{
+		DropItem "Geist";
+	}
+}
+
+class PainElementalSpawner : RandomSpawner replaces PainElemental
+{
+	default
+	{
+		DropItem "NaziGeist";
+	}
+}
+
+class CyberdemonSpawner : RandomSpawner replaces Cyberdemon
+{
+	default
+	{
+		DropItem "DeathKnight";
+	}
+}
+
+class SpiderMastermindSpawner : RandomSpawner replaces SpiderMastermind
+{
+	default
+	{
+		DropItem "Hitler";
+	}
+}
+
+class FatsoSpawner : RandomSpawner replaces Fatso
+{
+	default
+	{
+		DropItem "ChairGuy";
+	}
+}
+
+class DeadZombieManSpawner : RandomSpawner replaces DeadZombieMan
+{
+	default
+	{
+		DropItem "DeadGuard";
+	}
+}
+
+class DeadShotgunGuySpawner : RandomSpawner replaces DeadShotgunGuy
+{
+	default
+	{
+		DropItem "DeadMP40Guard";
+	}
+}
+
+class DeadDoomImpSpawner : RandomSpawner replaces DeadDoomImp
+{
+	default
+	{
+		DropItem "DeadOfficer";
+	}
+}
+
+class DeadDemonSpawner : RandomSpawner replaces DeadDemon
+{
+	default
+	{
+		DropItem "DeadDog";
+	}
+}
+
+class DeadCacodemonSpawner : RandomSpawner replaces DeadCacodemon
+{
+	default
+	{
+		DropItem "DeadHitlerGhost";
+	}
+}
+
+class StealthZombieManSpawner : ZombieManSpawner replaces StealthZombieMan {}
+class StealthShotgunGuySpawner : ShotgunGuySpawner replaces StealthShotgunGuy {}
+class StealthChaingunGuySpawner : ChaingunGuySpawner replaces StealthChaingunGuy {}
+class StealthDoomImpSpawner : DoomImpSpawner replaces StealthDoomImp {}
+class StealthDemonSpawner : DemonSpawner replaces StealthDemon {}
+class StealthRevenantSpawner : RevenantSpawner replaces StealthRevenant {}
+class StealthHellKnightSpawner : HellKnightSpawner replaces StealthHellKnight {}
+class StealthBaronSpawner : BaronOfHellSpawner replaces StealthBaron {}
+class StealthArchvileSpawner : ArchvileSpawner replaces StealthArchvile {}
+class StealthArachnotronSpawner : ArachnotronSpawner replaces StealthArachnotron {}
+class StealthCacodemonSpawner : CacodemonSpawner replaces StealthCacodemon {}
+class StealthFatsoSpawner : FatsoSpawner replaces StealthFatso {}
+
+//Heretic
+
+class HereticImpSpawner : LostSoulSpawner replaces HereticImp {}
+class HereticImpLeaderSpawner : ZombiemanSpawner replaces HereticImpLeader {}
+class MummySpawner : DoomImpSpawner replaces Mummy {}
+class MummyGhostSpawner : ShotgunGuySpawner replaces MummyGhost {}
+class MummyLeaderSpawner : ChaingunGuySpawner replaces MummyLeader {}
+class MummyLeaderGhostSpawner : SpectreSpawner replaces MummyLeaderGhost {}
+class KnightSpawner : HellKnightSpawner replaces Knight {}
+class KnightGhostSpawner : BaronOfHellSpawner replaces KnightGhost {}
+class ClinkSpawner : DemonSpawner replaces Clink {}
+class BeastSpawner : RevenantSpawner replaces Beast {}
+class SnakeSpawner : ArachnotronSpawner replaces Snake {}
+class WizardSpawner : CacodemonSpawner replaces Wizard {}
+class IronLichSpawner : ArchvileSpawner replaces IronLich {}
+class MinotaurSpawner : CyberdemonSpawner replaces Minotaur {}
+class Sorcerer1Spawner : SpiderMastermindSpawner replaces Sorcerer1 {}
+
+//Chex Quest 1/2
+
+class FlemoidusCommonusSpawner : ZombiemanSpawner replaces FlemoidusCommonus {}
+class FlemoidusBipedicusSpawner : ShotgunGuySpawner replaces FlemoidusBipedicus {}
+class ArmoredFlemoidusBipedicusSpawner : DoomImpSpawner replaces ArmoredFlemoidusBipedicus {}
+class FlemoidusCycloptisCommonusSpawner : DemonSpawner replaces FlemoidusCycloptisCommonus {}
+class FlembraneSpawner : BaronOfHellSpawner replaces Flembrane {}
+class ChexSoulSpawner : LostSoulSpawner replaces ChexSoul {}
+
+//Strife
+//TBD

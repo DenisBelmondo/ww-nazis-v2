@@ -53,6 +53,10 @@ class NaziWeaponPickup : Actor
 	}
 }
 
+#include "zscript/weasel/items.zc"
+#include "zscript/weasel/ammo.zc"
+#include "zscript/weasel/bullets.zc"
+
 #include "zscript/weasel/weapons/Enfield.zc"
 #include "zscript/weasel/weapons/FG42.zc"
 #include "zscript/weasel/weapons/Garand.zc"
@@ -77,3 +81,192 @@ class NaziWeaponPickup : Actor
 #include "zscript/weasel/weapons/shovel.zc"
 #include "zscript/weasel/weapons/sten.zc"
 #include "zscript/weasel/weapons/umg43.zc"
+
+#include "zscript/weasel/weaponspawners.zc"
+#include "zscript/weasel/nazis.zc"
+#include "zscript/weasel/nazispawners.zc"
+
+class WWNazisPlayer : PlayerPawn
+{
+	default
+	{
+		Player.InvulnerabilityMode "Reflective";
+		Player.StartItem "WeaselsRevolver";
+		Player.StartItem "Shovel";
+		Player.StartItem "WeaselsRevolverLoaded", 6;
+		Player.StartItem "Three57Ammo", 30;
+		Player.StartItem "GrenadePickup";
+		Player.ViewHeight 49;
+		Player.AttackZOffset 18;
+		Player.DisplayName "Some Guy with a Magnum";
+		Player.SoundClass "Weasel";
+		Player.WeaponSlot 1, "KnuckleDusters", "Shovel", "Firebrand";
+		Player.WeaponSlot 2, "Luger9mm", "Walther9mm", "WeaselsRevolver", "M1911";
+		Player.WeaponSlot 3, "TrenchShotgun", "Browning5", "MP40", "PPSH41", "Thompson", "Sten";
+		Player.WeaponSlot 4, "Kar98k", "G43", "Enfield", "Garand", "STG44", "FG42";
+		Player.WeaponSlot 5, "Pyrolight", "Nebelwerfer", "Panzerschreck", "UMG43";
+		Scale 1.1;
+	}
+
+	states
+	{
+	Spawn:
+		WEAS A -1;
+   		stop;
+   	See:
+      	WEAS ABCD 6;
+      	Loop;
+    Pain:
+        WEAS G 3 ACS_NamedExecuteAlways("PlayerPain", 0);
+        goto Spawn;
+	Missile:
+		WEAS E 12;
+		goto Spawn;
+	Melee:
+		WEAS F 6 BRIGHT;
+		goto Missile;
+	Death:
+	XDeath:
+		WEAS H 5 ACS_NamedExecuteAlways("PlayerScream", 0);
+		WEAS I 5;
+		WEAS J 5 A_NoBlocking();
+		WEAS K 5;
+		WEAS L -1;
+		stop;
+	}
+}
+
+class DeadPlayer : Actor replaces DeadMarine
+{
+	states
+	{
+	Spawn:
+		WEAS L -1;
+		stop;
+	}
+}
+
+class DeadPlayer2 : DeadPlayer replaces GibbedMarine {}
+
+class DeadPlayer3 : DeadPlayer replaces GibbedMarineExtra {}
+
+class BarrelSpawner : RandomSpawner replaces ExplosiveBarrel
+{
+	default
+	{
+		DropItem "TNTBarrel1";
+		DropItem "TNTBarrel2";
+		DropItem "TNTBarrel3";
+	}
+}
+
+class BarrelFrags : Actor
+{
+	default
+	{
+		Scale 0.75;
+	}
+
+	states
+	{
+	Spawn:
+		FRAG ABCDEFGHIJKLM 3;
+		FRAG N -1;
+		stop;
+	}
+}
+
+class TNTBarrel1 : ExplosiveBarrel
+{
+	default
+	{
+		Height 34;
+		DeathSound "world/barrelboom";
+	}
+
+	states
+	{
+	Spawn:
+		BARL A -1;
+		Loop;
+	Death:
+		BARX A 2 BRIGHT A_SpawnItemEx("BarrelFrags");
+		BARX B 2 BRIGHT A_Scream();
+		BARX CDEFG 2 BRIGHT;
+		BARX H 2 BRIGHT A_Explode();
+		BARX IJKLM 2 BRIGHT;
+		BARX M 1050 BRIGHT A_BarrelDestroy();
+		BARX M 5 A_Respawn();
+		wait;
+	}
+}
+
+class TNTBarrel2 : TNTBarrel1
+{
+	states
+	{
+	Spawn:
+		BARL B -1;
+		stop;
+	}
+}
+
+class TNTBarrel3 : TNTBarrel1
+{
+	states
+	{
+	Spawn:
+		BARL C -1;
+		stop;
+	}
+}
+
+//StartChecks
+
+class StartCheck : Inventory
+{
+	default
+	{
+		Inventory.InterHubAmount 0;
+	}
+}
+
+class Luger9mmStartCheck : StartCheck {}
+class Walther9mmStartCheck : StartCheck {}
+class WeaselsRevolverStartCheck : StartCheck {}
+class M1911StartCheck : StartCheck {}
+class TrenchShotgunStartCheck : StartCheck {}
+class Browning5StartCheck : StartCheck {}
+class MP40StartCheck : StartCheck {}
+class PPSH41StartCheck : StartCheck {}
+class ThompsonStartCheck : StartCheck {}
+class StenStartCheck : StartCheck {}
+class Kar98kStartCheck : StartCheck {}
+class G43StartCheck : StartCheck {}
+class EnfieldStartCheck : StartCheck {}
+class GarandStartCheck : StartCheck {}
+class STG44StartCheck : StartCheck {}
+class FG42StartCheck : StartCheck {}
+class PyrolightStartCheck : StartCheck {}
+class PanzerschreckStartCheck : StartCheck {}
+
+class IJustTraded : PowerUp
+{
+	default
+	{
+		PowerUp.Duration 35;
+	}
+}
+
+class ICheated : Weapon
+{
+	states
+	{
+	Ready:
+	Deselect:
+	Select:
+	Fire:
+		TNT1 A -1;
+		stop;
+	}
+}

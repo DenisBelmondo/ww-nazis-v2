@@ -1,0 +1,360 @@
+class ParabellumAmmo : Ammo
+{
+	default
+	{
+		Tag "9x19mm";
+		Inventory.Amount 8;
+		Inventory.MaxAmount 256;
+		Inventory.PickupMessage "Picked up a 9mm magazine.";
+		Ammo.BackpackAmount 64;
+		Ammo.BackpackMaxAmount 480;
+	}
+
+	states
+	{
+	Spawn:
+		MCLP A -1;
+		stop;
+	}
+}
+
+class ParabellumAmmoBox : ParabellumAmmo
+{
+	default
+	{
+		Inventory.Amount 64;
+		Inventory.PickupMessage "Picked up a box of 9mm ammo.";
+	}
+
+	states
+	{
+	Spawn:
+		MCLP B -1;
+		stop;
+	}
+}
+
+class Three57Ammo : Ammo
+{
+	default
+	{
+		Scale .5;
+		Tag ".357 Magnum";
+		Inventory.Amount 6;
+		Inventory.MaxAmount 72;
+		Inventory.PickupMessage "Picked up a speedloader.";
+		Ammo.BackpackAmount 12;
+		Ammo.BackpackMaxAmount 108;
+	}
+
+	states
+	{
+	Spawn:
+		REVA A -1;
+		stop;
+	}
+}
+
+class Forty5ACPAmmo : Ammo
+{
+	default
+	{
+		Tag ".45 ACP";
+		Inventory.Amount 7;
+		Inventory.MaxAmount 300;
+		Inventory.PickupMessage "Picked up a .45 ACP magazine.";
+		Ammo.BackpackAmount 80;
+		Ammo.BackpackMaxAmount 450;
+	}
+
+	states
+	{
+	Spawn:
+		45AM A -1;
+		stop;
+	}
+}
+
+class Forty5ACPAmmoBox : Forty5ACPAmmo
+{
+	default
+	{
+		Scale .6;
+		Inventory.Amount 20;
+		Inventory.PickupMessage "Picked up a box of .45 ACP ammo.";
+	}
+
+	states
+	{
+	Spawn:
+		45AM B -1;
+		stop;
+	}
+}
+
+class TwelveGaugeAmmo : Ammo
+{
+	default
+	{
+		Tag "12 Gauge";
+		Inventory.PickupMessage "Picked up some shotgun shells.";
+		Inventory.Amount 4;
+		Inventory.MaxAmount 32;
+		Ammo.BackpackAmount 4;
+		Ammo.BackpackMaxAmount 64;
+	}
+
+	states
+	{
+	Spawn:
+		SHEL A -1;
+		stop;
+	}
+}
+
+class TwelveGaugeAmmoBox : TwelveGaugeAmmo
+{
+	default
+	{
+		Inventory.Amount 16;
+		Inventory.PickupMessage "Picked up a box of shells.";
+	}
+
+	states
+	{
+	Spawn:
+		SBOX A -1;
+		stop;
+	}
+}
+
+class TokarevAmmo : Ammo
+{
+	default
+	{
+		Tag "7.62x25mm";
+		Inventory.Amount 71;
+		Inventory.MaxAmount 284;
+		Inventory.PickupMessage "Picked up a box of 7.62mm Tokarev ammo.";
+		Ammo.BackpackAmount 71;
+		Ammo.BackpackMaxAmount 568;
+	}
+
+	states
+	{
+	Spawn:
+		PPSA A -1;
+		stop;
+	}
+}
+
+class MauserAmmo : Ammo
+{
+	default
+	{
+		Scale .3;
+		Tag "7.92x57mm";
+		Inventory.Amount 5;
+		Inventory.MaxAmount 40;
+		Inventory.PickupMessage "Picked up a 7.92mm stripper clip.";
+		Ammo.BackpackAmount 5;
+		Ammo.BackpackMaxAmount 100;
+	}
+
+	states
+	{
+	Spawn:
+		792A A -1;
+		stop;
+	}
+}
+
+class MauserAmmoBox : MauserAmmo
+{
+	default
+	{
+		Scale 1.0;
+		Inventory.Amount 20;
+		Inventory.PickupMessage "Picked up a box of 7.92mm Mauser ammo.";
+	}
+
+	states
+	{
+	Spawn:
+		792A B -1;
+		stop;
+	}
+}
+
+class Three03Ammo : Ammo
+{
+	default
+	{
+		Tag ".303 British";
+		Inventory.Amount 5;
+		Inventory.MaxAmount 40;
+		Ammo.BackpackAmount 5;
+		Ammo.BackpackMaxAmount 100;
+		Inventory.PickupMessage "Picked up a .303 charger clip.";
+		Scale 0.3;
+	}
+
+	states
+	{
+	Spawn:
+		792A A -1;	//Placeholder sprite
+		stop;
+	}
+}
+
+class Three03AmmoBox : Three03Ammo
+{
+	default
+	{
+		Scale 1.0;
+		Inventory.Amount 20;
+		Inventory.PickupMessage "Picked up a box of .303 British ammo.";
+	}
+
+	states
+	{
+	Spawn:
+		792A B -1;	//Placeholder sprite
+		stop;
+	}
+}
+
+class Thirty06Ammo : Ammo
+{
+	default
+	{
+		Tag ".30-06";
+		Inventory.Amount 8;
+		Inventory.MaxAmount 40;
+		Ammo.BackpackAmount 8;
+		Ammo.BackpackMaxAmount 100;
+		Scale 0.1;
+		Inventory.PickupMessage "Picked up a .30-06 en bloc clip.";
+	}
+
+	states
+	{
+	Spawn:
+		M1GA A -1;
+		stop;
+	}
+}
+
+class Thirty06AmmoBox : Thirty06Ammo
+{
+	default
+	{
+		Inventory.Amount 20;
+		Inventory.PickupMessage "Picked up a box of .30-06 Springfield ammo.";
+		Scale 1;
+	}
+
+	states
+	{
+	Spawn:
+		M1GA B -1;
+		stop;
+	}
+}
+
+class KurzAmmo : Ammo
+{
+	default
+	{
+		Tag "7.92x33mm";
+		Inventory.Amount 15;
+		Inventory.MaxAmount 150;
+		Ammo.BackpackAmount 30;
+		Ammo.BackpackMaxAmount 270;
+		Inventory.PickupMessage "Picked up a 7.92x33mm rifle magazine.";
+	}
+
+	states
+	{
+	Spawn:
+		792K A -1;
+		stop;
+	}
+}
+
+class FlameAmmo : Ammo
+{
+	default
+	{
+		Scale 0.5;
+		Tag "Petrol";
+		Inventory.PickupMessage "A petrol canister.";
+		Inventory.Amount 25;
+		Inventory.MaxAmount 175;
+		Ammo.BackpackAmount 25;
+		Ammo.BackpackMaxAmount 350;
+	}
+
+	states
+	{
+	Spawn:
+		FAMO A -1;
+		stop;
+	}
+}
+
+class NebAmmo : Ammo
+{
+	default
+	{
+		Tag "Mini-rocket";
+		Inventory.Amount 5;
+		Inventory.MaxAmount 150;
+		Ammo.BackpackAmount 20;
+		Ammo.BackpackMaxAmount 300;
+		Inventory.PickupMessage "Picked up some mini-rockets.";
+	}
+
+	states
+	{
+	Spawn:
+		MNRB B -1;	//Needs a sprite
+		stop;
+	}
+}
+
+class NebAmmoBox : NebAmmo
+{
+	default
+	{
+		Inventory.Amount 30;
+		Inventory.PickupMessage "Picked up a crate of mini-rockets.";
+	}
+
+	states
+	{
+	Spawn:
+		MNRB B -1;
+		stop;
+	}
+}
+
+class PanzerAmmo : Ammo
+{
+	default
+	{
+		Scale 0.25;
+		Tag "Rocket";
+		Inventory.MaxAmount 10;
+		Inventory.PickupMessage "Picked up a Panzerschreck rocket.";
+		Ammo.BackpackAmount 1;
+		Ammo.BackpackMaxAmount 20;
+	}
+
+	states
+	{
+	Spawn:
+		PANA A -1;
+		stop;
+	}
+}

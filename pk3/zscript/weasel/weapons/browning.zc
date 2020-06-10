@@ -8,7 +8,7 @@ class Browning5 : NaziWeapon
 		Weapon.SelectionOrder 400;
 		Weapon.AmmoUse 1;
 		Weapon.AmmoType "Browning5Loaded";
-		Weapon.AmmoType2 "12GaugeAmmo";
+		Weapon.AmmoType2 "TwelveGaugeAmmo";
 		Weapon.AmmoUse2 1;
 		Weapon.UpSound "browning/select";
 
@@ -43,7 +43,7 @@ class Browning5 : NaziWeapon
 		loop;
 	Ready:
 		BA5G A 0 A_JumpIfInventory("Browning5Loaded", 0, 2);
-		BA5G A 0 A_JumpIfInventory("12GaugeAmmo", 1, 2);
+		BA5G A 0 A_JumpIfInventory("TwelveGaugeAmmo", 1, 2);
 		BA5G A 1 A_WeaponReady();
 		loop;
 		BA5G A 1 A_WeaponReady(WRF_ALLOWRELOAD);
@@ -73,7 +73,7 @@ class Browning5 : NaziWeapon
 		BA5G E 1 Offset(-6, 46);
 		BA5G E 1 Offset(-7, 55);
 	ReloadLoop:
-		BA5G A 0 A_TakeInventory("12GaugeAmmo", 1, TIF_NOTAKEINFINITE);
+		BA5G A 0 A_TakeInventory("TwelveGaugeAmmo", 1, TIF_NOTAKEINFINITE);
 		BA5G A 0 A_GiveInventory("Browning5Loaded");
 		BA5G E 1 Offset(-8,58) A_StartSound("browning/load", 5);
 		BA5G E 1 Offset(-9,64);
@@ -87,7 +87,7 @@ class Browning5 : NaziWeapon
 		BA5G E 3 Offset(-8,59) A_WeaponReady(WRF_NOBOB);
 		BA5G E 4 Offset(-8,58) A_WeaponReady(WRF_NOBOB);
 		BA5G A 0 A_JumpIfInventory("Browning5Loaded", 0, "ReloadFinish");
-		BA5G A 0 A_JumpIfInventory("12GaugeAmmo", 1, "ReloadLoop");
+		BA5G A 0 A_JumpIfInventory("TwelveGaugeAmmo", 1, "ReloadLoop");
 	ReloadFinish:
 		BA5G E 1 Offset(-8,58) A_StartSound("browning/cock", 5);
 		BA5G E 1 Offset(-8,60);
@@ -134,7 +134,7 @@ class Browning5Spawner : Actor
 	{
 	Spawn:
 		TNT1 A 0 NoDelay A_SpawnItemEx("Browning5Pickup", 0, 0, 0, vel.x, vel.y, vel.z);
-		TNT1 AA 0 A_SpawnItemEx("12GaugeAmmo", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
+		TNT1 AA 0 A_SpawnItemEx("TwelveGaugeAmmo", frandom(-16, 16), frandom(-16, 16), 0, vel.x, vel.y, vel.z, 0, SXF_NOCHECKPOSITION);
 		stop;
 	}
 }
